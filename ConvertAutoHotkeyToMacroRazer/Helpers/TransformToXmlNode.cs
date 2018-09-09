@@ -49,5 +49,14 @@ namespace ConvertAutoHotkeyToMacroRazer.Helpers
 
             return doc;
         }
+
+        public static XmlDocument AddNode(XmlDocument skeleton, XmlDocument newNode)
+        {
+            XmlDocument xml = new XmlDocument();
+
+
+            XmlElement elt = (XmlElement)skeleton.SelectSingleNode("/Macro/EventList");
+            return xml;
+        }
     }
 }

@@ -68,5 +68,38 @@ namespace XUnitTestProject1
 
             Assert.Equal(doc.OuterXml, result.OuterXml);
         }
+
+        [Fact]
+        public void Add_node_in_EventListNode()
+        {
+            var skeleton = @"<Macro>
+	                            <MacroName>etalon</MacroName>
+	                            <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
+	                            <EventList>
+	                            </EventList>
+                            </Macro>";
+            XmlDocument skeletonXml = new XmlDocument();
+            skeletonXml.Load(skeleton);
+
+            var nodeToAdd = @"<Event id =""KEYBOARD""><HID>07001E</HID><State>1</State></Event>";
+            XmlDocument XmlNode = new XmlDocument();
+            XmlNode.Load(nodeToAdd);
+
+            var finalxml = @"<Macro>
+	                            <MacroName>etalon</MacroName>
+	                            <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
+	                            <EventList>
+                                    <Event id =""KEYBOARD""><HID>07001E</HID><State>1</State></Event>
+	                            </EventList>
+                            </Macro>";
+            XmlDocument expectedXml = new XmlDocument();
+            expectedXml.Load(finalxml);
+
+            var result = TransformToXmlNode.AddNode(skeletonXml, XmlNode);
+
+            Assert.Equal(expectedXml, result);
+
+
+        }
     }
 }
