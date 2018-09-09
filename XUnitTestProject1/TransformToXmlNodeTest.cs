@@ -50,5 +50,23 @@ namespace XUnitTestProject1
 
             Assert.Equal(doc.OuterXml, result.OuterXml);
         }
+
+        [Fact]
+        public void Init_xml_return_skeleton_with_MacroName_And_UUID()
+        {
+            var xmlSkeleton = @"<Macro>
+	                    <MacroName>etalon</MacroName>
+	                    <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
+	                    <EventList>
+	                    </EventList>
+                    </Macro>";
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xmlSkeleton);
+
+            var result = TransformToXmlNode.InitXml("etalon", "845185D6-926C-4B78-A9B8-90B23BA72CEE");
+
+            Assert.Equal(doc.OuterXml, result.OuterXml);
+        }
     }
 }

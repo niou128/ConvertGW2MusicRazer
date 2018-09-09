@@ -33,5 +33,21 @@ namespace ConvertAutoHotkeyToMacroRazer.Helpers
 
             return doc;
         }
+
+        public static XmlDocument InitXml(string macroName, string uuid)
+        {
+            string skeleton = String.Empty;
+            skeleton = $@"<Macro>
+	                        <MacroName>{macroName}</MacroName>
+	                        <UUID>{uuid}</UUID>
+	                        <EventList>
+	                        </EventList>
+                        </Macro>";
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(skeleton);
+
+            return doc;
+        }
     }
 }
