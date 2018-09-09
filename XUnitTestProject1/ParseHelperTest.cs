@@ -4,12 +4,12 @@ using Xunit;
 
 namespace XUnitTestProject1
 {
-    public class UnitTest1
+    public class ParseHelperTest
     {
         [Fact]
         public void If_1_element_return_List_1_Element()
         {
-            string entry = "{numpad 3 up}";
+            string entry = "SendInput {Numpad2 down}";
 
             var result = ParseHelper.ParseElt(entry);
 
@@ -20,7 +20,9 @@ namespace XUnitTestProject1
         [Fact]
         public void IF_3_Elements_Return_List_With_3_Elements()
         {
-            string entry = "{numpad 3 up}{sleep 100} {numpad3 down}";
+            string entry = @"SendInput {Numpad2 up}
+SendInput {Numpad6 up}
+Sleep, 75";
 
             var result = ParseHelper.ParseElt(entry);
 
@@ -30,11 +32,19 @@ namespace XUnitTestProject1
         [Fact]
         public void If_n_element_Return_List_With_n_Element()
         {
-            string entry = @"{numpad 3 up}{sleep 100} {numpad3 down}{numpad 3 up}{sleep 100} {numpad3 down}
-{numpad 3 up}{sleep 100} {numpad3 down}{numpad 3 up}{sleep 100} {numpad3 down}";
+            string entry = @"SendInput {Numpad2 down}
+SendInput {Numpad6 down}
+SendInput {Numpad2 up}
+SendInput {Numpad6 up}
+Sleep, 75
+SendInput {Numpad9}
+SendInput {Numpad2 down}
+Sleep, 300
+SendInput {Numpad2 up}
+SendInput {Numpad3 down}";
 
             var result = ParseHelper.ParseElt(entry);
-            Assert.Equal(12, result.Count);
+            Assert.Equal(10, result.Count);
         }
 
         [Fact]

@@ -12,7 +12,7 @@ namespace ConvertAutoHotkeyToMacroRazer.Helpers
             List<string> listElt = new List<string>();
             if (!String.IsNullOrEmpty(entry))
             {
-                string pattern = @"{[\w\d ]+}";
+                string pattern = @"((SendInput[\w\d {}]+)|(Sleep, [\d]+))";
                 Match match = Regex.Match(entry, pattern, RegexOptions.IgnoreCase);
                 while (match.Success)
                 {
