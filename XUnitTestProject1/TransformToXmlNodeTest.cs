@@ -72,30 +72,31 @@ namespace XUnitTestProject1
         [Fact]
         public void Add_node_in_EventListNode()
         {
-            var skeleton = @"<Macro>
-	                            <MacroName>etalon</MacroName>
-	                            <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
-	                            <EventList>
-	                            </EventList>
-                            </Macro>";
-            XmlDocument skeletonXml = new XmlDocument();
-            skeletonXml.Load(skeleton);
+            var xmlSkeleton = @"<Macro>
+	                    <MacroName>etalon</MacroName>
+	                    <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
+	                    <EventList>
+	                    </EventList>
+                    </Macro>";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xmlSkeleton);
+
 
             var nodeToAdd = @"<Event id =""KEYBOARD""><HID>07001E</HID><State>1</State></Event>";
             XmlDocument XmlNode = new XmlDocument();
-            XmlNode.Load(nodeToAdd);
+            XmlNode.LoadXml(nodeToAdd);
 
             var finalxml = @"<Macro>
-	                            <MacroName>etalon</MacroName>
-	                            <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
-	                            <EventList>
+                             <MacroName>etalon</MacroName>
+                             <UUID>845185D6-926C-4B78-A9B8-90B23BA72CEE</UUID>
+                             <EventList>
                                     <Event id =""KEYBOARD""><HID>07001E</HID><State>1</State></Event>
-	                            </EventList>
+                             </EventList>
                             </Macro>";
             XmlDocument expectedXml = new XmlDocument();
-            expectedXml.Load(finalxml);
+            expectedXml.LoadXml(finalxml);
 
-            var result = TransformToXmlNode.AddNode(skeletonXml, XmlNode);
+            var result = TransformToXmlNode.AddNode(doc, XmlNode);
 
             Assert.Equal(expectedXml, result);
 
